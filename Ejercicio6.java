@@ -1,90 +1,96 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-class Main {
-    protected List<Node> nodes;
+class LAN {
+    private List<Nodo> nodos;
+    private String topologia;
+    private int tamanoPaquete;
 
-    public Main() {
-        this.nodes = new ArrayList<>();
+    public LAN() {
+        this.nodos = new ArrayList<>();
+        this.topologia = "";
+        this.tamanoPaquete = 0;
     }
 
-    public void addNode(Node node) {
-        nodes.add(node);
+    public List<Nodo> listarNodos() {
+        return nodos;
     }
 
-    public void removeNode(Node node) {
-        nodes.remove(node);
+    public void agregarNodo(Nodo nodo) {
+        nodos.add(nodo);
     }
 
-    public List<Node> getNodes() {
-        return nodes;
+    public void quitarNodo(Nodo nodo) {
+        nodos.remove(nodo);
     }
 
-    public abstract void configureNetwork();
-
-    public abstract void setPacketSize(int size);
-
-    public abstract void sendPacket(Node sender, Node receiver, String data);
-
-    public abstract void broadcastPacket(Node sender, String data);
-
-    public abstract void performStatistics();
-}
-
-class Main {
-    protected String nodeName;
-
-    public Node(String nodeName) {
-        this.nodeName = nodeName;
+    public void configurarRed(String topologia) {
+        this.topologia = topologia;
     }
 
-    public String getNodeName() {
-        return nodeName;
+    public void establecerTamanoPaquete(int tamano) {
+        this.tamanoPaquete = tamano;
+    }
+
+    public void enviarPaquete(Nodo origen, Nodo destino, Paquete paquete) {
+    }
+
+    public void difundirPaquete(Nodo origen, Paquete paquete) {
+    }
+
+    public void realizarEstadisticas() {
     }
 }
 
-class Main extends LAN {
-    @Override
-    public void configureNetwork() {
+class Nodo {
+    private int id;
+    private String tipoDispositivo;
+
+    public Nodo(int id, String tipoDispositivo) {
+        this.id = id;
+        this.tipoDispositivo = tipoDispositivo;
     }
 
-    @Override
-    public void setPacketSize(int size) {
+    public int getId() {
+        return id;
     }
 
-    @Override
-    public void sendPacket(Node sender, Node receiver, String data) {
-    }
-
-    @Override
-    public void broadcastPacket(Node sender, String data) {
-    }
-
-    @Override
-    public void performStatistics() {
+    public String getTipoDispositivo() {
+        return tipoDispositivo;
     }
 }
 
-class Main extends LAN {
-}
+class Paquete {
+    private String contenido;
+    private int tamano;
 
+    public Paquete(String contenido, int tamano) {
+        this.contenido = contenido;
+        this.tamano = tamano;
+    }
+
+    public String getContenido() {
+        return contenido;
+    }
+
+    public int getTamano() {
+        return tamano;
+    }
+}
 
 public class Main {
     public static void main(String[] args) {
-        Main starLAN = new Main();
-        Main node1 = new Main("Node1");
-        Main node2 = new Main("Node2");
+        LAN lan = new LAN();
 
-        starLAN.addNode(node1);
-        starLAN.addNode(node2);
+        lan.agregarNodo(new Nodo(1, "PC"));
+        lan.agregarNodo(new Nodo(2, "Impresora"));
+        lan.configurarRed("Estrella");
+        lan.establecerTamanoPaquete(1024);
 
-        starLAN.configureNetwork();
-        starLAN.setPacketSize(1024);
-        starLAN.sendPacket(node1, node2, "Hello, Node2!");
-        starLAN.broadcastPacket(node1, "Broadcast message!");
-
-        starLAN.performStatistics();
+        List<Nodo> nodos = lan.listarNodos();
+        System.out.println("Nodos actuales en la red LAN:");
+        for (Nodo nodo : nodos) {
+            System.out.println("ID: " + nodo.getId() + ", Tipo: " + nodo.getTipoDispositivo());
+        }
     }
 }
