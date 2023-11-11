@@ -44,8 +44,8 @@ public class Main {
     this.visualizarHora();
 }
     public static void main(String[] args) {
-        Main hora1 = new Main(5, 30, 45);
-        Main hora2 = new Main(2, 15, 20);
+        Main hora1 = new Main(3, 25, 30);
+        Main hora2 = new Main(7, 45, 40);
 
         Main horaNoInicializada = new Main();
 
