@@ -1,4 +1,4 @@
-public class Empleado {
+public class Main {
 
     public void darDeAlta() {
         System.out.println("Empleado dado de alta.");
@@ -18,7 +18,7 @@ public class Empleado {
     }
 }
 
-public class Supervisor extends Empleado {
+public class Main extends Empleado {
 
     @Override
     public double calcularSalario() {
@@ -30,7 +30,7 @@ public class Supervisor extends Empleado {
     }
 }
 
-public class Director extends Supervisor {
+public class Main extends Supervisor {
 
     @Override
     public double calcularSalario() {
