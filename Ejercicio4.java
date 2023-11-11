@@ -55,7 +55,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main miHora = new Main(12, 30, 45);
+        Main miHora = new Main(14, 25, 15);
 
         System.out.println("Hora actual:");
         miHora.visualizar();
